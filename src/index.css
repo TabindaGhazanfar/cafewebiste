@@ -1,0 +1,48 @@
+/* GOOGLE FONT */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ROOT COLORS */
+
+:root{
+
+  --pink1:#fff7f8;
+  --pink2:#fdecef;
+  --pink3:#f4c7d0;
+  --pink4:#e8b8c1;
+
+  --brown1:#6b2d2d;
+  --brown2:#7a2e2e;
+  --brown3:#5c1f1f;
+
+  --cream:#fffaf9;
+
+}
+
+
+/* GLOBAL */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+
+  font-family:'Poppins',sans-serif;
+
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--pink1);
+
+  overflow-x:hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+}

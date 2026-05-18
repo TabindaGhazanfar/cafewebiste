@@ -44,6 +44,5 @@ This project was built to practice modern frontend development, UI design, and a
 
 ## 📦 Installation
 
-bash
 npm install
 npm run dev

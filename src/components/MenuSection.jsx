@@ -21,54 +21,60 @@ export default function MenuSection() {
   const [loading, setLoading] = useState(true); 
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      
-      fetch("http://localhost:5000/menu")
-        .then((res) => res.json())
-        .then((data) => {
-          const updatedData = data.map((item, index) => ({
-            ...item,
-            img: images[index] || p3,
-          }));
+  
+useEffect(() => {
+  let ctx = gsap.context(() => {
 
-          setMenuItems(updatedData);
-          setLoading(false); 
+    // ✅ NETLIFY COMPATIBLE FETCH
+    fetch("/db.json")
+      .then((res) => res.json())
+      .then((data) => {
 
-          /* TITLE ANIMATION */
-          gsap.from(".title", {
-            scrollTrigger: {
-              trigger: ".title",
-              start: "top 85%",
-            },
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-          });
+        // 🔥 Important: data.menu use karna hai
+        const updatedData = data.menu.map((item, index) => ({
+          ...item,
+          img: images[index] || p3,
+        }));
 
-          /* CARDS ANIMATION */
-          gsap.from(".menu-card", {
-            scrollTrigger: {
-              trigger: ".menu-grid",
-              start: "top 80%",
-            },
-            y: 60,
-            opacity: 0,
-            stagger: 0.15,
-            duration: 1,
-            ease: "power3.out",
-          });
-        })
-        .catch((err) => {
-          console.log("Fetch Error:", err);
-          setLoading(false);
+        setMenuItems(updatedData);
+        setLoading(false);
+
+        /* TITLE ANIMATION */
+        gsap.from(".title", {
+          scrollTrigger: {
+            trigger: ".title",
+            start: "top 85%",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
         });
 
-    }, sectionRef);
+        /* CARDS ANIMATION */
+        gsap.from(".menu-card", {
+          scrollTrigger: {
+            trigger: ".menu-grid",
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1,
+          ease: "power3.out",
+        });
 
-    return () => ctx.revert(); 
-  }, []);
+      })
+      .catch((err) => {
+        console.log("Fetch Error:", err);
+        setLoading(false);
+      });
+
+  }, sectionRef);
+
+  return () => ctx.revert();
+}, []);
+          
 
   useEffect(() => {
     if (!loading && menuItems.length > 0) {

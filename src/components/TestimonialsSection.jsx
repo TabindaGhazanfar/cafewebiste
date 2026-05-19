@@ -12,40 +12,41 @@ gsap.registerPlugin(ScrollTrigger);
 export default function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/testimonials")
-      .then((res) => res.json())
-      .then((data) => {
-        setTestimonials(data);
+ 
+       useEffect(() => {
+  fetch("/db.json")
+    .then((res) => res.json())
+    .then((data) => {
+      setTestimonials(data.testimonials);
 
-        /* SWIPER ANIMATION */
-        setTimeout(() => {
-          gsap.from(".mySwiper", {
-            scrollTrigger: {
-              trigger: ".mySwiper",
-              start: "top 85%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power3.out",
-          });
-        }, 300);
+      /* SWIPER ANIMATION */
+      setTimeout(() => {
+        gsap.from(".mySwiper", {
+          scrollTrigger: {
+            trigger: ".mySwiper",
+            start: "top 85%",
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out",
+        });
+      }, 300);
 
-        /* FLOATING CARDS */
-        setTimeout(() => {
-          gsap.to(".test-card", {
-            y: -6,
-            duration: 2.2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            stagger: 0.12,
-          });
-        }, 500);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+      /* FLOATING CARDS */
+      setTimeout(() => {
+        gsap.to(".test-card", {
+          y: -6,
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          stagger: 0.12,
+        });
+      }, 500);
+    })
+    .catch((err) => console.log(err));
+}, []);
 
   return (
     <section className="testimonial-section">

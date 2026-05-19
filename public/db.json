@@ -1,0 +1,79 @@
+{
+  "menu": [
+    {
+      "id": 1,
+      "name": "Caramel Latte",
+      "desc": "Creamy caramel coffee",
+      "price": "$6.50"
+    },
+    {
+      "id": 2,
+      "name": "Mocha Coffee",
+      "desc": "Chocolate flavored delight",
+      "price": "$7.20"
+    },
+    {
+      "id": 3,
+      "name": "Vanilla Cappuccino",
+      "desc": "Smooth & rich espresso",
+      "price": "$5.80"
+    },
+    {
+      "id": 4,
+      "name": "Strawberry Pastry",
+      "desc": "Sweet berry cream flavor",
+      "price": "$4.20"
+    },
+    {
+      "id": 5,
+      "name": "Chocolate Muffin",
+      "desc": "Soft & chocolaty bite",
+      "price": "$4.50"
+    },
+    {
+      "id": 6,
+      "name": "Blueberry Cake",
+      "desc": "Fresh creamy dessert",
+      "price": "$5.00"
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Ayesha",
+      "review": "Amazing coffee and cozy vibe!",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Sara",
+      "review": "Best café experience ever.",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "Ali",
+      "review": "Loved the desserts and ambience.",
+      "rating": 4
+    },
+    {
+      "id": 4,
+      "name": "Hamza",
+      "review": "Very peaceful place to work.",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "Noor",
+      "review": "Coffee was absolutely delicious.",
+      "rating": 5
+    },
+    {
+      "id": 6,
+      "name": "Zain",
+      "review": "Highly recommended café.",
+      "rating": 4
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-import cafe1 from "../assets/cafe1.png";
-import cafe2 from "../assets/cafe2.png";
-import cafe3 from "../assets/cafe3.png";
+import cafe1 from "../assets/cafe11.png";
+import cafe2 from "../assets/cafe22.png";
+import cafe3 from "../assets/cafe33.png";
 const images = [
   cafe1,
   cafe2,

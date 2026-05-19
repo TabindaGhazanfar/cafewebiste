@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 /* GSAP */
 import gsap from "gsap";
+import cafe from "../assets/cafe.png";
 
 export default function Hero() {
 
@@ -38,12 +39,11 @@ export default function Hero() {
   return (
     <div className="hero" id="home">
 
-      {/* BACKGROUND IMAGE */}
       <img
-        src="/src/assets/cafe.png"
-        alt="Cafe"
-        className="bg"
-      />
+  src={cafe}
+  alt="Cafe"
+  className="bg"
+/>
 
       {/* OVERLAY */}
       <div className="overlay"></div>

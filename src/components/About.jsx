@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-
+import cafe1 from "../assets/cafe1.png";
+import cafe2 from "../assets/cafe2.png";
+import cafe3 from "../assets/cafe3.png";
 const images = [
-  "/src/assets/cafe1.png",
-  "/src/assets/cafe2.png",
-  "/src/assets/cafe3.png",
+  cafe1,
+  cafe2,
+  cafe3,
 ];
 
 export default function About() {

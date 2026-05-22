@@ -1,5 +1,5 @@
-import burger from "../assets/p1.png";
-import coffee from "../assets/c1.png";
+import burger from "../assets/p1.webp";
+import coffee from "../assets/c2.webp";
 
 export default function OrderBanner() {
 
@@ -11,6 +11,7 @@ export default function OrderBanner() {
         <img
           src={burger}
           alt="Burger"
+          loading="lazy"
         />
       </div>
 
@@ -34,6 +35,7 @@ export default function OrderBanner() {
         <img
           src={coffee}
           alt="Coffee"
+          loading="lazy"
         />
       </div>
 

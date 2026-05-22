@@ -1,49 +1,81 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 /* GSAP */
 import gsap from "gsap";
-import cafe from "../assets/cafe.png";
+import { ScrollTrigger } from "gsap/ScrollTrigger"; // 🚀 ScrollTrigger import kiya
+import cafe from "../assets/cafe.webp"; 
+
+// Register the plugin lazmi karna hai
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const bgRef = useRef(null);       // 🚀 Background image ke liye ref
+  const contentRef = useRef(null);  // 🚀 Text content ke liye ref
 
   useEffect(() => {
-    /* BACKGROUND SMOOTH ZOOM FIXED FOR RESPONSIVE */
-    gsap.to(".bg", {
-      scale: 1.08,
-      duration: 8,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
+    let ctx = gsap.context(() => {
+      
+      /* 🚀 AHMAD BHAI'S PARALLAX EFFECT */
+      // Jab user scroll karega toh background image dynamic aur premium slow speed se move hogi
+      gsap.to(bgRef.current, {
+        yPercent: 20, // Halka vertical shift depth create karne ke liye
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true, // Smooth pinning and syncing with scrollbar
+        },
+      });
 
-    /* FLOATING CIRCLE 1 */
-    gsap.to(".c1", {
-      y: 30,
-      x: 20,
-      duration: 5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
+      /* 🚀 CATCHY FADE-IN / FADE-OUT ON SCROLL */
+      // Scroll karne par hero ka text content smoothly upar slide hote hue opacity drop karega
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom 40%", // Adhay scroll tak clear fade layer create karega
+          scrub: true,
+        },
+      });
 
-    /* FLOATING CIRCLE 2 */
-    gsap.to(".c2", {
-      y: -25,
-      x: -15,
-      duration: 6,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
+      /* FLOATING CIRCLE 1 */
+      gsap.to(".c1", {
+        y: 20,
+        x: 15,
+        duration: 6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      /* FLOATING CIRCLE 2 */
+      gsap.to(".c2", {
+        y: -15,
+        x: -10,
+        duration: 7,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }, containerRef);
+
+    return () => ctx.revert(); 
   }, []);
 
   return (
-    <div className="hero" id="home">
-
+    <div className="hero" id="home" ref={containerRef}>
       <img
-  src={cafe}
-  alt="Cafe"
-  className="bg"
-/>
+        ref={bgRef} // 🚀 Ref attached here
+        src={cafe}
+        alt="Cafe"
+        className="bg"
+        fetchpriority="high" 
+        style={{ transform: "scale(1.2)" }} // 🚀 Parallax bounds secure karne ke liye default zoom scale
+      />
 
       {/* OVERLAY */}
       <div className="overlay"></div>
@@ -53,7 +85,7 @@ export default function Hero() {
       <div className="circle c2"></div>
 
       {/* CONTENT */}
-      <div className="content">
+      <div className="content" ref={contentRef}> {/* 🚀 Ref attached here */}
         <h1>
           Sip the Perfect
           <br />
@@ -105,21 +137,18 @@ export default function Hero() {
           text-rendering: optimizeLegibility;
         }
           
-
-        /* HERO BASE (Laptop/Desktop View - NOW OPEN & SPACIOUS) */
         .hero{
           position:relative;
           width:100%;
-          min-height: 120vh; /* 85vh se 95vh kiya taake background image ko khuli space mile */
+          min-height: 120vh;
           overflow:hidden;
           display:flex;
           align-items:center;
           justify-content:center;
-          background:#000;
-          padding: 120px 20px 160px 20px; /* Padding badha di taake text ko upar neeche se saans lene ki jagah mile */
+          background: #1c0a0a;
+          padding: 120px 20px 160px 20px;
         }
 
-        /* BG - ACCURATE LAYER OVERLAY */
         .bg{
           position:absolute;
           top: 0;
@@ -128,12 +157,10 @@ export default function Hero() {
           height:100%;
           object-fit:cover;
           object-position: center;
-          transform: scale(1);
-          will-change:transform;
+          will-change: transform;
           backface-visibility:hidden;
         }
 
-        /* OVERLAY */
         .overlay{
           position:absolute;
           inset:0;
@@ -144,7 +171,6 @@ export default function Hero() {
           z-index:1;
         }
 
-        /* DECOR */
         .circle{
           position:absolute;
           border-radius:50%;
@@ -168,7 +194,6 @@ export default function Hero() {
           bottom:120px;
         }
 
-        /* CONTENT CONTAINER */
         .content{
           position:relative;
           z-index:9;
@@ -176,24 +201,25 @@ export default function Hero() {
           width:100%;
           max-width:1000px;
           padding:20px;
-          margin-top: 20px; /* Thoda sa neeche push kiya balanced alignment ke liye */
-          will-change:transform;
+          margin-top: 20px;
+          will-change: transform, opacity;
         }
 
-        /* HEADING */
+        /* HEADING FIXES FOR LCP */
         .content h1{
           font-size:74px;
           line-height:1.15;
-          font-family:'Pacifico',cursive;
+          font-family:'Pacifico', cursive;
+          font-display: swap;
           color:#ffffff;
           margin-bottom:40px;
           max-width:900px;
           margin-left:auto;
           margin-right:auto;
           text-shadow: 0 10px 35px rgba(0,0,0,0.75);
+          will-change: transform, opacity;
         }
 
-        /* PARAGRAPH */
         .content p{
           margin:20px auto 40px auto;
           max-width:720px;
@@ -205,7 +231,6 @@ export default function Hero() {
           letter-spacing:0.3px;
         }
 
-        /* BUTTONS */
         .buttons{
           display:flex;
           justify-content:center;
@@ -214,7 +239,6 @@ export default function Hero() {
           z-index:9;
         }
 
-        /* BUTTON */
         .primary-btn{
           padding:16px 40px;
           border:none;
@@ -238,7 +262,6 @@ export default function Hero() {
           filter:brightness(1.08);
         }
 
-        /* SVG DIVIDER STRUCTURE */
         .custom-shape-divider-bottom-1778423407{
           position:absolute;
           bottom: -1px;
@@ -261,9 +284,6 @@ export default function Hero() {
           fill:#fff7f8;
         }
 
-        /* ========================================== */
-        /* --- TABLET VIEW FIX (UNTOUCHED & SAFE) --- */
-        /* ========================================== */
         @media(max-width:992px){
           .hero {
             min-height: auto;
@@ -283,9 +303,6 @@ export default function Hero() {
           }
         }
 
-        /* ========================================== */
-        /* --- MOBILE VIEW FIX (UNTOUCHED & SAFE) --- */
-        /* ========================================== */
         @media(max-width:768px){
           .hero{
             min-height: auto !important; 
@@ -334,7 +351,6 @@ export default function Hero() {
           }
         }
 
-        /* Extra tiny viewport safety layout */
         @media(max-width: 380px) {
           .hero {
             padding-top: 85px;

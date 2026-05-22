@@ -63,7 +63,7 @@ float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float t
     float finalAmplitude = amplitude_normal * amplitude_strength
                            * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
 
-    float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
+   float time_scaled = time / 25.0 + (mouse.x - 0.5) * 0.4;
     float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
 
     float xnoise = mix(

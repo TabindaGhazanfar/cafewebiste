@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-import cafe1 from "../assets/cafe11.png";
-import cafe2 from "../assets/cafe22.png";
-import cafe3 from "../assets/cafe33.png";
+import cafe1 from "../assets/cafe11.webp";
+import cafe2 from "../assets/cafe22.webp";
+import cafe3 from "../assets/cafe33.webp";
+
 const images = [
   cafe1,
   cafe2,
@@ -115,6 +116,10 @@ export default function About() {
                 ref={(el) => (cardsRef.current[i] = el)}
                 className="about-card-img"
                 alt="Cafe Interior"
+                /* 🚀 CLS FIX: Explicit layout bounds for browser layout reserving */
+                width="320"
+                height="420"
+                loading="lazy"
               />
             ))}
           </div>
@@ -150,20 +155,19 @@ export default function About() {
 
         .about-left h2 {
           font-size: 52px;
-          color: #5a2222; /* Halka sa deep maroon behtar contrast ke liye */
+          color: #5a2222;
           margin-bottom: 20px;
           line-height: 1.2;
         }
 
         .about-left p {
-          color: #4a3b3b; /* Stronger dark shade door se readability badhane ke liye */
+          color: #4a3b3b;
           line-height: 1.8;
           margin-bottom: 14px;
           font-size: 15px;
-          font-weight: 450; /* Subtle weight enhancements */
+          font-weight: 450;
         }
 
-        /* STATS COMPACT SETTINGS */
         .about-stats {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -185,19 +189,18 @@ export default function About() {
 
         .about-stat-box h3 {
           font-size: 26px;
-          color: #a04961; /* Clearer contrast */
+          color: #a04961;
           margin: 0 0 4px 0;
         }
 
         .about-stat-box span {
-          color: #5c4545; /* Enhanced text definition */
+          color: #5c4545;
           font-size: 13px;
           line-height: 1.4;
           display: block;
           font-weight: 500;
         }
 
-        /* RIGHT SIDE GALLERY */
         .about-right {
           position: relative;
           width: 380px;
@@ -228,6 +231,8 @@ export default function About() {
 
         .about-card-img {
           position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -235,9 +240,10 @@ export default function About() {
           border: 6px solid rgba(255,255,255,0.85);
           box-shadow: 0 15px 35px rgba(0,0,0,0.1);
           will-change: transform, opacity;
+          /* 🚀 Init opacity zero taaki animation start hone se pehle flash na kare */
+          opacity: 0;
         }
 
-        /* LAPTOP RESPONSIVE */
         @media(max-width: 1200px) {
           .about-section { padding: 70px 0; }
           .about-container { gap: 40px; padding: 0 30px; }
@@ -246,7 +252,6 @@ export default function About() {
           .about-cards-wrapper { width: 280px; height: 360px; }
         }
 
-        /* TABLET RESPONSIVE */
         @media(max-width: 992px) {
           .about-container {
             flex-direction: column;
@@ -256,10 +261,9 @@ export default function About() {
           .about-left { max-width: 100%; }
           .about-stats { max-width: 500px; margin: 25px auto 0; }
           .about-right { width: 100%; height: 400px; }
-          .about-cards-wrapper { margin: 0 auto; left: 20px; }
+          .about-cards-wrapper { margin: 0 auto; left: 0; }
         }
 
-        /* MOBILE VIEW */
         @media(max-width: 576px) {
           .about-section { padding: 40px 0; }
           .about-container { padding: 0 20px; gap: 24px; }
@@ -297,7 +301,6 @@ export default function About() {
           .about-cards-wrapper {
             width: 180px;
             height: 240px;
-            left: 12px;
           }
           .about-card-img {
             border-radius: 20px;
@@ -308,7 +311,7 @@ export default function About() {
         @media(max-width: 360px) {
           .about-left h2 { font-size: 26px; }
           .about-right { height: 230px; }
-          .about-cards-wrapper { width: 150px; height: 200px; left: 8px; }
+          .about-cards-wrapper { width: 150px; height: 200px; }
           .about-blob { width: 150px; height: 150px; }
         }
       `}</style>

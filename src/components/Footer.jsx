@@ -120,10 +120,6 @@ export default function Footer() {
     <span>Gujrat</span>
   </p>
 
-  <p className="flex items-start gap-2.5 text-white/70 text-xs sm:text-sm mb-2">
-    <FaPhoneAlt className="w-4 h-4 text-[#f7a3a7] shrink-0 pt-0.5" /> 
-    <span>+923001234567</span>
-  </p>
 
   <p className="flex items-start gap-2.5 text-white/70 text-xs sm:text-sm mb-2 break-all">
     <FaEnvelope className="w-4 h-4 text-[#f7a3a7] shrink-0 pt-0.5" /> 
